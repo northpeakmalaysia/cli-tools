@@ -1,6 +1,6 @@
 {
   "name": "@swarmai/cli-tools",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Wraps installed CLIs as agent tools — Linux/macOS/Windows/Termux (Android)",
   "type": "module",
   "main": "./dist/index.js",
