@@ -1,0 +1,19 @@
+# SwarmAI CLI-as-Tool plugin — doc 15 §3.
+# Wraps installed CLIs (docker, git, kubectl, npm, …, am, pm, svc, input)
+# as agent-callable tools with capability-ladder policy gating.
+id: '@swarmai/cli-tools'
+version: '0.1.0'
+kind: 'tool'
+entry: './dist/index.js'
+permissions:
+  network: none           # cli-wrapper itself makes no network calls; wrapped CLIs may.
+  filesystem: read-write  # configs at <workspaceRoot>/cli-tools.yaml; wrapped CLIs touch arbitrary paths.
+  secrets: []             # no plugin-managed secrets — wrapped CLIs use their own creds (AWS profile, kubeconfig, etc.)
+capabilities:
+  - 'tool:register'
+  - 'fs:read'
+  - 'fs:write'
+  - 'subprocess:spawn'
+manifests:
+  bundledCount: 50
+  description: 'git, gh, glab, svn, hg, docker, podman, kubectl, helm, kustomize, k9s, npm, pnpm, yarn, bun, pip, poetry, uv, cargo, aws, gcloud, az, heroku, fly, doctl, supabase, psql, mysql, redis-cli, sqlite3, mongo, ffmpeg, magick, jq, yq, xmllint, curl, httpie, rg, fd, bat, eza, terraform, ansible, packer, vagrant, am, pm, pkg, termux-battery-status, svc, input'
